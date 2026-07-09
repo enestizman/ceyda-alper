@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Ceyda & Alper | Nişan Davetiyesi</title>
+
+<!-- Montserrat: gövde metni / Alex Brush: estetik "ve" işaretine sahip zarif kaligrafi fontu -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   TASARIM TOKEN SİSTEMİ - AÇIK (LIGHT) TEMA
+   ============================================================ */
+:root{
+  --bg-deep:      #FDFBF7; 
+  --bg-soft:      #F0EBE1; 
+  --gold:         #B88E52; 
+  --gold-soft:    #C8A671;
+  --floral:       #C1B6A6; 
+  --ink:          #36312D; 
+  --ink-muted:    #7A7168; 
+  
+  --glass-fill:   rgba(255,255,255,0.55);
+  --glass-fill-2: rgba(255,255,255,0.85);
+  --glass-border: rgba(184,142,82,0.18); 
+  --shadow-deep:  0 15px 40px rgba(54, 49, 45, 0.06); 
+  
+  --radius-lg:    24px;
+  --radius-md:    16px;
+  --radius-sm:    12px;
+  
+  --font-script:  'Alex Brush', cursive;
+  --font-display: 'Montserrat', sans-serif;
+  --font-body:    'Montserrat', sans-serif;
+  --ease-soft:    cubic-bezier(.22,.61,.36,1);
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body{
+  font-family: var(--font-body);
+  background: linear-gradient(135deg, var(--bg-deep) 0%, var(--bg-soft) 100%);
+  background-attachment: fixed;
+  color: var(--ink);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+
+img{ max-width:100%; display:block; }
+button{ font-family:inherit; cursor:pointer; border:none; background:none; }
+a{ color:inherit; text-decoration:none; }
+
+::selection{ background: var(--gold); color: #fff; }
+
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+  outline: 2px solid var(--gold-soft);
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   İMZA MOTİFİ
+   ============================================================ */
+.floral{
+  display:block;
+  width: clamp(40px, 10vw, 56px); 
+  height:auto;
+  opacity:.8;
+}
+.floral path{ fill:none; stroke: var(--floral); stroke-width:1.4; stroke-linecap:round; }
+.floral circle{ fill: var(--floral); opacity:.85; }
+.floral.center{ margin:0 auto; }
+
+.floral-divider{
+  display:flex; justify-content:center; align-items:center;
+  gap:10px;
+  margin: 16px 0; 
+}
+.floral-divider .line{
+  height:1px; 
+  width: clamp(20px, 8vw, 40px);
+  background: linear-gradient(90deg, transparent, rgba(193,182,166,0.5), transparent);
+}
+.floral-divider .floral{ width:30px; }
+
+/* ============================================================
+   CAM (GLASSMORPHISM) YÜZEY SINIFI
+   ============================================================ */
+.glass{
+  background: linear-gradient(155deg, var(--glass-fill-2), var(--glass-fill));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(12px); 
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-deep);
+}
+
+/* ============================================================
+   1) KARŞILAMA EKRANI (INTRO OVERLAY)
+   ============================================================ */
+#intro-overlay{
+  position:fixed; inset:0;
+  z-index:100;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:20px;
+  text-align:center;
+  padding: 20px;
+  background: linear-gradient(175deg, var(--bg-deep), var(--bg-soft));
+  transition: opacity 1s var(--ease-soft), visibility 1s var(--ease-soft);
+}
+#intro-overlay.hidden{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+.intro-monogram{
+  font-family: var(--font-script);
+  font-weight:400;
+  font-size: clamp(2.8rem, 14vw, 5.5rem); 
+  color: var(--gold);
+  line-height:1.1;
+  animation: introFloat 5s ease-in-out infinite;
+}
+@keyframes introFloat{
+  0%,100%{ transform: translateY(0); }
+  50%{ transform: translateY(-8px); }
+}
+.intro-sub{
+  font-size:.7rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color: var(--ink-muted);
+}
+#intro-tap-btn{
+  margin-top:14px;
+  padding:14px 28px;
+  border-radius:999px;
+  border:1px solid var(--glass-border);
+  background: #ffffff; 
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  color: var(--gold);
+  font-size:.7rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  animation: pulseRing 2.6s ease-in-out infinite;
+  transition: transform .35s var(--ease-soft), box-shadow .35s;
+}
+#intro-tap-btn:hover{ transform: scale(1.04); box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
+@keyframes pulseRing{
+  0%,100%{ box-shadow: 0 0 0 0 rgba(184,142,82,0.2); }
+  50%{ box-shadow: 0 0 0 14px rgba(184,142,82,0); }
+}
+
+#invitation{
+  opacity:0;
+  transform: translateY(24px);
+  transition: opacity 1.1s var(--ease-soft), transform 1.1s var(--ease-soft);
+}
+#invitation.reveal{
+  opacity:1;
+  transform:none;
+}
+
+/* ============================================================
+   ORTAK KATMAN / GENİŞLİK
+   ============================================================ */
+.wrap{
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 0 16px; 
+  position:relative;
+  z-index:1;
+}
+
+section{ padding: 24px 0 8px; } 
+
+.eyebrow{
+  text-align:center;
+  font-size: clamp(0.9rem, 4vw, 1.2rem); 
+  letter-spacing: 4px; 
+  text-transform:uppercase;
+  color: var(--gold);
+  margin-bottom: 20px; 
+  font-weight: 600; 
+}
+
+/* ============================================================
+   2) HERO SECTION
+   ============================================================ */
+.hero{
+  padding: 30px 0 16px; 
+  text-align:center;
+}
+.hero-families{
+  font-size: clamp(0.65rem, 3vw, 0.72rem);
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color: var(--ink-muted);
+  line-height:1.9;
+  margin-bottom:16px;
+}
+.hero-families b{ color: var(--gold); font-weight:600; }
+
+.hero-flourish{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  margin-bottom: 4px;
+}
+.hero-flourish .floral:last-child{ transform: scaleX(-1); }
+
+.hero-names{
+  font-family: var(--font-script);
+  font-weight:400;
+  font-size: clamp(3rem, 15vw, 5.5rem); 
+  margin: 0 0 4px;
+  color: var(--ink);
+  line-height:1.2;
+  word-wrap: break-word; 
+}
+.hero-names .amp{
+  color: var(--gold);
+  padding: 0 2px;
+}
+.hero-event{
+  font-size:.8rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color: var(--gold-soft);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+.hero-tagline{
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight:400;
+  font-size:.8rem;
+  color: var(--ink-muted);
+  max-width: 90%;
+  margin: 0 auto 20px;
+  line-height:1.6;
+}
+.hero-date{
+  font-family: var(--font-display);
+  font-weight:500;
+  font-size: clamp(0.9rem, 4vw, 1.05rem);
+  color: var(--ink);
+  background: var(--glass-fill-2);
+  border:1px solid var(--glass-border);
+  display:inline-block;
+  padding: 10px 20px;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  font-size:.75rem;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  transition: transform .3s var(--ease-soft), box-shadow .3s var(--ease-soft), background .3s;
+}
+.btn-ghost{
+  background: #ffffff;
+  border:1px solid var(--glass-border);
+  color: var(--ink);
+  font-weight:500;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+.btn-ghost:hover{ background: var(--bg-deep); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.04); }
+.btn-block{ width:100%; }
+
+/* ============================================================
+   3) MEKAN VE KONUM
+   ============================================================ */
+.venue-card{ padding: 20px; text-align:center; }
+.venue-map-frame{
+  width:100%;
+  height:160px;
+  border-radius: var(--radius-md);
+  margin-bottom:16px;
+  overflow:hidden;
+  border:1px solid var(--glass-border);
+  filter: contrast(1) sepia(0.1); 
+}
+.venue-map-frame iframe{
+  width:100%; height:100%; border:0; display:block;
+}
+.venue-name{
+  font-family: var(--font-display);
+  font-weight:600;
+  font-size:1.15rem;
+  color:var(--ink);
+  margin-bottom:4px;
+}
+.venue-loc{
+  font-size:.8rem;
+  color: var(--ink-muted);
+  margin-bottom:6px;
+}
+.venue-time{
+  font-size:.75rem;
+  color: var(--gold);
+  letter-spacing:1px;
+  margin-bottom:20px;
+  font-weight: 500;
+}
+
+/* ============================================================
+   4) GERİ SAYIM
+   ============================================================ */
+.countdown-card{
+  padding: 20px 12px; 
+  display:grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 8px; 
+  text-align:center;
+}
+.cd-unit{ display:flex; flex-direction:column; gap:2px; }
+.cd-value{
+  font-family: var(--font-display);
+  font-weight:700;
+  font-size: clamp(1.2rem, 5.5vw, 1.9rem);
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+}
+.cd-label{
+  font-size:.55rem;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+
+/* ============================================================
+   5) HAVA DURUMU KARTI
+   ============================================================ */
+.weather-card{
+  padding: 16px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.weather-left{ display:flex; align-items:center; gap:12px; }
+.weather-icon{
+  width:46px; height:46px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.5rem;
+  border-radius:50%;
+  background: rgba(184,142,82,0.08); 
+  border:1px solid var(--glass-border);
+  flex-shrink: 0;
+}
+.weather-desc{ font-size:.7rem; color: var(--ink-muted); }
+.weather-day{ font-size:.65rem; letter-spacing:1px; text-transform:uppercase; color: var(--gold); margin-bottom:2px; font-weight: 600;}
+.weather-temp{
+  font-family: var(--font-display);
+  font-weight:700;
+  font-size:1.6rem;
+  color: var(--ink);
+}
+
+footer{
+  text-align:center;
+  padding: 30px 16px 40px; 
+}
+.footer-names{
+  font-family: var(--font-script);
+  font-weight:400;
+  font-size: 2.2rem;
+  color: var(--gold);
+  margin-bottom:4px;
+}
+.footer-date{
+  font-size:.6rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+
+/* ============================================================
+   ÇOK DAR EKRANLAR İÇİN EKSTRA OPTİMİZASYON (iPhone SE vb. 320px)
+   ============================================================ */
+@media (max-width: 360px){
+  .countdown-card { gap: 4px; padding: 16px 8px; }
+  .cd-value { font-size: 1.1rem; }
+  .weather-card {
+    flex-direction: column; 
+    text-align: center;
+  }
+  .weather-left { flex-direction: column; gap: 8px; }
+  .weather-temp { margin-top: 8px; }
+}
+
+@media (min-width:600px){
+  .wrap{ max-width: 620px; }
+}
+</style>
+</head>
+<body>
+
+<div id="intro-overlay">
+  <svg class="floral center" viewBox="0 0 80 60" aria-hidden="true">
+    <path d="M40,50 C40,34 34,26 40,10"/>
+    <path d="M40,32 C30,26 24,30 20,22"/>
+    <path d="M40,26 C50,20 56,24 60,16"/>
+    <path d="M40,40 C32,36 28,40 24,34"/>
+    <path d="M40,40 C48,36 52,40 56,34"/>
+    <circle cx="40" cy="10" r="3"/>
+  </svg>
+  <div class="intro-monogram">Ceyda <span class="amp">&amp;</span> Alper</div>
+  <div class="intro-sub">Nişan Törenimize Davetlisiniz</div>
+  <button id="intro-tap-btn" type="button">Davetiyeyi Görüntülemek İçin Dokunun</button>
+</div>
+
+<main id="invitation">
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-families">
+        <b>Akçasayar Ailesi</b> &nbsp;&amp;&nbsp; <b>Bilgiç Ailesi</b>
+      </div>
+
+      <div class="hero-flourish">
+        <svg class="floral" viewBox="0 0 80 60" aria-hidden="true">
+          <path d="M70,50 C55,44 46,44 30,50"/>
+          <path d="M50,46 C46,38 48,32 42,26"/>
+          <path d="M50,46 C54,38 58,34 56,26"/>
+          <circle cx="42" cy="24" r="2.4"/>
+          <circle cx="56" cy="24" r="2.4"/>
+        </svg>
+        <svg class="floral" viewBox="0 0 80 60" aria-hidden="true">
+          <path d="M70,50 C55,44 46,44 30,50"/>
+          <path d="M50,46 C46,38 48,32 42,26"/>
+          <path d="M50,46 C54,38 58,34 56,26"/>
+          <circle cx="42" cy="24" r="2.4"/>
+          <circle cx="56" cy="24" r="2.4"/>
+        </svg>
+      </div>
+
+      <h1 class="hero-names">Ceyda<span class="amp">&amp;</span>Alper</h1>
+      <div class="hero-event">Nişan Töreni</div>
+      <p class="hero-tagline">"En güzel 'evet'imize giden yolun ilk adımı."</p>
+      <div class="hero-date">25 Temmuz 2026 &nbsp;·&nbsp; 19:00</div>
+    </div>
+  </section>
+
+  <div class="floral-divider">
+    <span class="line"></span>
+    <svg class="floral" viewBox="0 0 80 60" aria-hidden="true">
+      <path d="M40,50 C40,34 34,26 40,10"/>
+      <path d="M40,32 C30,26 24,30 20,22"/>
+      <path d="M40,26 C50,20 56,24 60,16"/>
+      <circle cx="40" cy="10" r="3"/>
+    </svg>
+    <span class="line"></span>
+  </div>
+
+  <section id="venue-section">
+    <div class="wrap">
+      <div class="eyebrow">Nerede</div>
+      
+      <div class="glass venue-card">
+        <div class="venue-map-frame">
+          <iframe
+            src="https://www.google.com/maps?q=Spilos+Hotel+Manisa&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Spilos Hotel, Manisa - Harita">
+          </iframe>
+        </div>
+        <div class="venue-name">Spilos Hotel</div>
+        <div class="venue-loc">Manisa, Türkiye</div>
+        <div class="venue-time">Törenin Başlangıcı — 19:00</div>
+        <a class="btn btn-ghost btn-block" id="directions-btn"
+           href="https://www.google.com/maps/search/?api=1&query=Spilos+Hotel+Manisa"
+           target="_blank" rel="noopener">
+          🧭 Yol Tarifi Al
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="floral-divider">
+    <span class="line"></span>
+    <svg class="floral" viewBox="0 0 80 60" aria-hidden="true">
+      <path d="M40,50 C40,34 34,26 40,10"/>
+      <path d="M40,32 C30,26 24,30 20,22"/>
+      <path d="M40,26 C50,20 56,24 60,16"/>
+      <circle cx="40" cy="10" r="3"/>
+    </svg>
+    <span class="line"></span>
+  </div>
+
+  <section id="countdown-section">
+    <div class="wrap">
+      <div class="eyebrow">Geriye Kalan Süre</div>
+      
+      <div class="glass countdown-card">
+        <div class="cd-unit"><span class="cd-value" id="cd-days">00</span><span class="cd-label">Gün</span></div>
+        <div class="cd-unit"><span class="cd-value" id="cd-hours">00</span><span class="cd-label">Saat</span></div>
+        <div class="cd-unit"><span class="cd-value" id="cd-mins">00</span><span class="cd-label">Dakika</span></div>
+        <div class="cd-unit"><span class="cd-value" id="cd-secs">00</span><span class="cd-label">Saniye</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="weather-section">
+    <div class="wrap">
+      <div class="glass weather-card">
+        <div class="weather-left">
+          <div class="weather-icon">☀️</div>
+          <div>
+            <div class="weather-day">25 Temmuz Tahmini</div>
+            <div class="weather-desc">Güneşli</div>
+          </div>
+        </div>
+        <div style="text-align:right;">
+          <div class="weather-temp">30°</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="floral-divider">
+    <span class="line"></span>
+    <svg class="floral" viewBox="0 0 80 60" aria-hidden="true">
+      <path d="M40,50 C40,34 34,26 40,10"/>
+      <path d="M40,32 C30,26 24,30 20,22"/>
+      <path d="M40,26 C50,20 56,24 60,16"/>
+      <circle cx="40" cy="10" r="3"/>
+    </svg>
+    <span class="line"></span>
+  </div>
+
+  <footer>
+    <div class="footer-names">Ceyda <span class="amp">&amp;</span> Alper</div>
+    <div class="footer-date">25 Temmuz 2026</div>
+  </footer>
+
+</main>
+
+<script>
+const introOverlay = document.getElementById('intro-overlay');
+const introBtn = document.getElementById('intro-tap-btn');
+const invitation = document.getElementById('invitation');
+
+introBtn.addEventListener('click', () => {
+  introOverlay.classList.add('hidden');
+  setTimeout(() => {
+    invitation.classList.add('reveal');
+  }, 150);
+  setTimeout(() => { introOverlay.style.display = 'none'; }, 1100);
+});
+
+const EVENT_DATE = new Date('2026-07-25T19:00:00');
+
+function updateCountdown(){
+  const now = new Date();
+  const diff = EVENT_DATE - now;
+
+  const daysEl = document.getElementById('cd-days');
+  const hoursEl = document.getElementById('cd-hours');
+  const minsEl = document.getElementById('cd-mins');
+  const secsEl = document.getElementById('cd-secs');
+
+  if(diff <= 0){
+    daysEl.textContent = '00';
+    hoursEl.textContent = '00';
+    minsEl.textContent = '00';
+    secsEl.textContent = '00';
+    return;
+  }
+
+  const days = Math.floor(diff / (1000*60*60*24));
+  const hours = Math.floor((diff / (1000*60*60)) % 24);
+  const mins = Math.floor((diff / (1000*60)) % 60);
+  const secs = Math.floor((diff / 1000) % 60);
+
+  daysEl.textContent = String(days).padStart(2,'0');
+  hoursEl.textContent = String(hours).padStart(2,'0');
+  minsEl.textContent = String(mins).padStart(2,'0');
+  secsEl.textContent = String(secs).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
